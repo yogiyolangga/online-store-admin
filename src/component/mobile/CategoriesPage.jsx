@@ -74,7 +74,7 @@ const Form = ({ baseUrl }) => {
             onChange={(e) => {
               setName(e.target.value);
             }}
-            className="w-full outline-none py-1 text-white bg-white bg-transparent px-1"
+            className="w-full outline-none py-1 text-white  bg-transparent px-1"
           />
           <div className="h-0.5 rounded-2xl bg-gradient-to-r from-[#815ee0] to-[#eeadd5]"></div>
         </div>
@@ -90,7 +90,7 @@ const Form = ({ baseUrl }) => {
             onChange={(e) => {
               setDescription(e.target.value);
             }}
-            className="w-full outline-none py-1 text-white bg-white bg-transparent px-1"
+            className="w-full outline-none py-1 text-white  bg-transparent px-1"
           />
           <div className="h-0.5 rounded-2xl bg-gradient-to-r from-[#815ee0] to-[#eeadd5]"></div>
         </div>
