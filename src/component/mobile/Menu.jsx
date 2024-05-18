@@ -63,10 +63,10 @@ const MenuList = () => {
           Categories
         </a>
         <a
-          href="/categories"
+          href="/bank"
           className="font-semibold text-white border-b py-2"
         >
-          Menu 1
+          Bank
         </a>
         <a
           href="/categories"

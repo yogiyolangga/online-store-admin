@@ -2,25 +2,99 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdNotificationsActive } from "react-icons/md";
 import Menu from "./Menu";
+import Axios from "axios";
 
 import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
+import { useState } from "react";
 
 export default function Dashboard() {
   const baseUrl = "http://localhost:3000";
+  const [reqConfirmPay, setReqConfirmPay] = useState([]);
+  const [waitingPayment, setWaitingPayment] = useState([]);
+  const [packaged, setPackaged] = useState([]);
+  const [shipping, setShipping] = useState([]);
+  const [complete, setComplete] = useState([]);
   const navigate = useNavigate();
+  const username = localStorage.getItem("userAdmin");
+  const [adminData, setAdminData] = useState([]);
 
   const isLoggedIn = () => {
     const token = localStorage.getItem("tokenAdmin");
     return !!token;
   };
 
+  const getAdminData = () => {
+    Axios.get(`${baseUrl}/api/admin/${username}`).then((response) => {
+      if (response.data.error) {
+        console.log(response.data.error);
+      } else if (response.data.success) {
+        setAdminData(response.data.result);
+      } else {
+        console.log("Something goes error!");
+      }
+    });
+  };
+
+  const getReqConfirmPay = () => {
+    Axios.get(`${baseUrl}/api/admin/orders/check`).then((response) => {
+      if (response.data.error) {
+        console.log(response.data.error);
+      } else if (response.data.success) {
+        setReqConfirmPay(response.data.result);
+      } else {
+        console.log("Something goes error");
+      }
+    });
+  };
+
+  const getWaitingPayment = () => {
+    Axios.get(`${baseUrl}/api/admin/orders/pending`).then((response) => {
+      if (response.data.error) {
+        console.log(response.data.error);
+      } else if (response.data.success) {
+        setWaitingPayment(response.data.result);
+      } else {
+        console.log("Something goes error");
+      }
+    });
+  };
+
+  const getOrderInfo = (status) => {
+    Axios.get(`${baseUrl}/api/admin/orders/packaged/${status}`).then(
+      (response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else if (response.data.success) {
+          if (status === "request") {
+            setPackaged(response.data.result);
+          } else if (status === "shipping") {
+            setShipping(response.data.result);
+          } else if (status === "completed") {
+            setComplete(response.data.result);
+          } else {
+            console.log("status undefined");
+          }
+        } else {
+          console.log("Something goes error");
+        }
+      }
+    );
+  };
+
   useEffect(() => {
     if (!isLoggedIn()) {
       navigate("/login");
     }
-  });
+
+    getAdminData();
+    getReqConfirmPay();
+    getWaitingPayment();
+    getOrderInfo("request");
+    getOrderInfo("shipping");
+    getOrderInfo("completed");
+  }, []);
 
   return (
     <>
@@ -33,7 +107,10 @@ export default function Dashboard() {
               className="w-8 rounded"
             />
             <h1 className="text-white font-light">
-              Hello, <span className="font-semibold">Name!</span>
+              Hello,{" "}
+              <span className="font-semibold">
+                {adminData.length < 1 ? "" : adminData[0].full_name}
+              </span>
             </h1>
             <div className="flex-1 flex justify-end">
               <MdNotificationsActive className="text-white text-xl" />
@@ -43,7 +120,13 @@ export default function Dashboard() {
             <Chart />
           </div>
           <div>
-            <Widget />
+            <Widget
+              reqConfirmPay={reqConfirmPay}
+              waitingPayment={waitingPayment}
+              packaged={packaged}
+              shipping={shipping}
+              complete={complete}
+            />
           </div>
         </div>
         <Menu />
@@ -52,7 +135,13 @@ export default function Dashboard() {
   );
 }
 
-const Widget = () => {
+const Widget = ({
+  reqConfirmPay,
+  waitingPayment,
+  packaged,
+  complete,
+  shipping,
+}) => {
   return (
     <>
       <div className="w-full px-6 flex flex-col py-6 gap-2">
@@ -60,47 +149,76 @@ const Widget = () => {
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
-          <h1 className="text-sm text-zinc-50 font-semibold">
-            Request Confirm Pay
-          </h1>
+          <div className="flex flex-col">
+            <h1 className="text-sm text-zinc-50 font-semibold">Not yet pay</h1>
+            <p className="text-xs text-zinc-300">
+              Order place, but not pay yet
+            </p>
+          </div>
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
-            2
+            {waitingPayment.length}
           </div>
         </div>
         <div
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
-          <h1 className="text-sm text-zinc-50 font-semibold">Not yet pay</h1>
+          <div className="flex flex-col">
+            <h1 className="text-sm text-zinc-50 font-semibold">
+              Request Confirm Pay
+            </h1>
+            <p className="text-xs text-zinc-300">
+              Buyer ask payment confirmation!
+            </p>
+          </div>
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
-            2
+            {reqConfirmPay.length}
           </div>
         </div>
         <div
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
-          <h1 className="text-sm text-zinc-50 font-semibold">Packaged order</h1>
+          <div className="flex flex-col">
+            <h1 className="text-sm text-zinc-50 font-semibold">
+              Packaged order
+            </h1>
+            <p className="text-xs text-zinc-300">
+              already pay, and seller processing
+            </p>
+          </div>
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
-            2
+            {packaged.length}
           </div>
         </div>
         <div
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
-          <h1 className="text-sm text-zinc-50 font-semibold">Shipping order</h1>
+          <div className="flex flex-col">
+            <h1 className="text-sm text-zinc-50 font-semibold">
+              Shipping order
+            </h1>
+            <p className="text-xs text-zinc-300">
+              order on delivery to customer address
+            </p>
+          </div>
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
-            2
+            {shipping.length}
           </div>
         </div>
         <div
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
-          <h1 className="text-sm text-zinc-50 font-semibold">Finished order</h1>
+          <div className="flex flex-col">
+            <h1 className="text-sm text-zinc-50 font-semibold">
+              Finished order
+            </h1>
+            <p className="text-xs text-zinc-300">Order has completed</p>
+          </div>
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
-            2
+            {complete.length}
           </div>
         </div>
       </div>
@@ -217,7 +335,7 @@ const Chart = () => {
       <div style={{ width: "100%" }}>
         <BarChart
           dataset={dataset}
-          colors={['#45bcfe']}
+          colors={["#45bcfe"]}
           xAxis={[
             {
               scaleType: "band",

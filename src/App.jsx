@@ -4,6 +4,7 @@ import LoginPage from "./component/mobile/LoginPage";
 import CreateAdmin from "./component/mobile/CreateAdminPage";
 import Dashboard from "./component/mobile/DashboardPage";
 import Categories from "./component/mobile/CategoriesPage";
+import BankPayment from "./component/mobile/BankPayment";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/create" element={<CreateAdmin />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/bank" element={<BankPayment />} />
           </Routes>
         </div>
       </Router>
