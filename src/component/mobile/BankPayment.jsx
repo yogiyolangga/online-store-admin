@@ -2,6 +2,7 @@ import { useState } from "react";
 import Menu from "./Menu";
 import Axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function BankPayment() {
   const baseUrl = "http://localhost:3000";
@@ -33,7 +34,6 @@ const Form = ({ baseUrl }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const fd = new FormData();
     Axios.post(`${baseUrl}/api/admin/bank`, {
       bank: bank,
       name: name,
@@ -41,9 +41,7 @@ const Form = ({ baseUrl }) => {
     }).then((response) => {
       if (response.data.success) {
         alert("Success");
-        setName("");
-        setBank("");
-        setNumber("");
+        window.location.reload();
       } else if (response.data.error) {
         console.log(response.data.error);
       } else {
@@ -125,7 +123,7 @@ const ListBank = ({ baseUrl }) => {
   const [data, setData] = useState([]);
 
   const getData = () => {
-    Axios.get(`${baseUrl}/api/admin/bank`).then((response) => {
+    Axios.get(`${baseUrl}/api/admissn/bank`).then((response) => {
       if (response.data.error) {
         console.log(response.data.error);
       } else if (response.data.success) {
@@ -150,7 +148,7 @@ const ListBank = ({ baseUrl }) => {
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, []);
 
   return (
     <>

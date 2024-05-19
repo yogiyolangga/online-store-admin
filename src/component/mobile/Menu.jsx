@@ -44,7 +44,7 @@ export default function Menu() {
         </div>
       </div>
       <div
-        className={`fixed bottom-0 flex items-center justify-center z-20 w-full duration-200 origin-top ${positionMenu}`}
+        className={`fixed bottom-0 flex items-center justify-center z-20 w-full duration-200 origin-top max-w-[360px] ${positionMenu}`}
       >
         <MenuList />
       </div>
@@ -62,10 +62,7 @@ const MenuList = () => {
         >
           Categories
         </a>
-        <a
-          href="/bank"
-          className="font-semibold text-white border-b py-2"
-        >
+        <a href="/bank" className="font-semibold text-white border-b py-2">
           Bank
         </a>
         <a

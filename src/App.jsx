@@ -5,6 +5,10 @@ import CreateAdmin from "./component/mobile/CreateAdminPage";
 import Dashboard from "./component/mobile/DashboardPage";
 import Categories from "./component/mobile/CategoriesPage";
 import BankPayment from "./component/mobile/BankPayment";
+import PaymentConfirm from "./component/mobile/PaymentConfirm";
+import Packaged from "./component/mobile/Packaged";
+import Shipping from "./component/mobile/Shipping";
+import Finished from "./component/mobile/Finished";
 
 function App() {
   return (
@@ -18,6 +22,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/bank" element={<BankPayment />} />
+            <Route path="/payment" element={<PaymentConfirm />} />
+            <Route path="/packaged" element={<Packaged />} />
+            <Route path="/shipping" element={<Shipping />} />
+            <Route path="/finished" element={<Finished />} />
           </Routes>
         </div>
       </Router>

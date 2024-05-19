@@ -159,7 +159,7 @@ const Widget = ({
             {waitingPayment.length}
           </div>
         </div>
-        <div
+        <a href="/payment"
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
@@ -174,8 +174,8 @@ const Widget = ({
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
             {reqConfirmPay.length}
           </div>
-        </div>
-        <div
+        </a>
+        <a href="/packaged"
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
@@ -190,8 +190,8 @@ const Widget = ({
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
             {packaged.length}
           </div>
-        </div>
-        <div
+        </a>
+        <a href="/shipping"
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
@@ -206,8 +206,8 @@ const Widget = ({
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
             {shipping.length}
           </div>
-        </div>
-        <div
+        </a>
+        <a href="/finished"
           className="w-full backdrop-blur-md py-2 bg-gradient-to-r from-[#45bcfe] to-[#7e54de] bg-opacity-90 rounded-3xl
          flex justify-between px-2 items-center"
         >
@@ -220,7 +220,7 @@ const Widget = ({
           <div className="flex w-6 h-6 text-white font-semibold rounded-full justify-center items-center bg-red-400">
             {complete.length}
           </div>
-        </div>
+        </a>
       </div>
     </>
   );
