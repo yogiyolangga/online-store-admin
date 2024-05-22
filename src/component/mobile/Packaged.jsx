@@ -2,15 +2,11 @@ import { useEffect, useState } from "react";
 import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { isLoggedIn, truncateTitle } from "../utils";
 
 export default function Packaged() {
   const baseUrl = "http://localhost:3000";
   const navigate = useNavigate();
-
-  const isLoggedIn = () => {
-    const token = localStorage.getItem("tokenAdmin");
-    return !!token;
-  };
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -58,14 +54,6 @@ const Data = ({ baseUrl }) => {
     getData();
   }, []);
 
-  function truncateTitle(str) {
-    if (str.length > 20) {
-      return str.substring(0, 30) + "..."; // Mengambil karakter dari indeks 0 hingga 7
-    } else {
-      return str; // Mengembalikan string asli jika panjangnya kurang dari atau sama dengan 8 karakter
-    }
-  }
-
   return (
     <>
       <div className="w-full px-2 pt-4 pb-20">
@@ -76,7 +64,7 @@ const Data = ({ baseUrl }) => {
             </div>
           ) : (
             data.map((item) => (
-              <div
+              <a href={`/order/detail/${item.product_id}/${item.order_item_id}/${item.order_id}`}
                 key={item.order_item_id}
                 className="p-2 border shadow flex justify-between gap-2 items-center bg-zinc-200 rounded"
               >
@@ -88,7 +76,9 @@ const Data = ({ baseUrl }) => {
                   />
                 </div>
                 <div className="flex flex-1 flex-col justify-center">
-                  <div className="font-semibold">{truncateTitle(item.name)}</div>
+                  <div className="font-semibold">
+                    {truncateTitle(item.name)}
+                  </div>
                   <div className="text-zinc-700 text-sm flex">
                     <p>
                       {item.quantity}, {item.additional_info}
@@ -97,9 +87,14 @@ const Data = ({ baseUrl }) => {
                 </div>
                 <div></div>
                 <div className="">
-                    <p className="text-xs font-light text-zinc-600">seller : <span className="text-sm font-semibold text-zinc-900">{item.seller}</span></p>
+                  <p className="text-xs font-light text-zinc-600">
+                    seller :{" "}
+                    <span className="text-sm font-semibold text-zinc-900">
+                      {item.seller}
+                    </span>
+                  </p>
                 </div>
-              </div>
+              </a>
             ))
           )}
         </div>

@@ -78,7 +78,7 @@ const Data = ({ baseUrl }) => {
             </div>
           ) : (
             data.map((item) => (
-              <div
+              <a href={`/order/detail/${item.product_id}/${item.order_item_id}/${item.order_id}`}
                 key={item.order_item_id}
                 className="p-2 border shadow flex justify-between gap-2 items-center bg-zinc-200 rounded"
               >
@@ -112,7 +112,7 @@ const Data = ({ baseUrl }) => {
                     {item.seller}
                   </span>
                 </div>
-              </div>
+              </a>
             ))
           )}
         </div>

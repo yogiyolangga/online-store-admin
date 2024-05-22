@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { isLoggedIn } from "../utils";
 
 export default function CreateAdmin() {
   const [username, setUsername] = useState("");
@@ -10,6 +11,12 @@ export default function CreateAdmin() {
   const [role, setRole] = useState("");
   const baseUrl = "http://localhost:3000";
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate("/login");
+    }
+  });
 
   const onSubmit = async () => {
     try {
@@ -105,6 +112,7 @@ export default function CreateAdmin() {
             Login
           </button>
           <p className="text-sm text-zinc-300">need help to create</p>
+          <a href="/dashboard" className="font-semibold text-zinc-300">cancel</a>
         </div>
       </div>
     </>

@@ -8,6 +8,7 @@ import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { useState } from "react";
+import { isLoggedIn } from "../utils";
 
 export default function Dashboard() {
   const baseUrl = "http://localhost:3000";
@@ -19,11 +20,6 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const username = localStorage.getItem("userAdmin");
   const [adminData, setAdminData] = useState([]);
-
-  const isLoggedIn = () => {
-    const token = localStorage.getItem("tokenAdmin");
-    return !!token;
-  };
 
   const getAdminData = () => {
     Axios.get(`${baseUrl}/api/admin/${username}`).then((response) => {

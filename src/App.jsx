@@ -9,6 +9,7 @@ import PaymentConfirm from "./component/mobile/PaymentConfirm";
 import Packaged from "./component/mobile/Packaged";
 import Shipping from "./component/mobile/Shipping";
 import Finished from "./component/mobile/Finished";
+import OrderDetails from "./component/mobile/OrderDetails";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
             <Route path="/packaged" element={<Packaged />} />
             <Route path="/shipping" element={<Shipping />} />
             <Route path="/finished" element={<Finished />} />
+            <Route
+              path="/order/detail/:product/:orderitem/:order"
+              element={<OrderDetails />}
+            />
           </Routes>
         </div>
       </Router>

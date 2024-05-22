@@ -57,19 +57,19 @@ const MenuList = () => {
     <>
       <div className="w-[80%] flex flex-col gap-3 p-3 rounded-md bg-gradient-to-b from-[#38497f] to-[#243561]">
         <a
-          href="/categories"
+          href="/create"
           className="font-semibold text-white border-b py-2"
         >
-          Categories
-        </a>
-        <a href="/bank" className="font-semibold text-white border-b py-2">
-          Bank
+          Add New Admin
         </a>
         <a
           href="/categories"
           className="font-semibold text-white border-b py-2"
         >
-          Menu 2
+          Categories Selling Product
+        </a>
+        <a href="/bank" className="font-semibold text-white border-b py-2">
+          Bank Third Party Payment
         </a>
       </div>
     </>
