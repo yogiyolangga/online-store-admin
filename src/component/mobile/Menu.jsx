@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function Menu() {
-  const [positionMenu, setPositionMenu] = useState("translate-y-44");
+  const [positionMenu, setPositionMenu] = useState("scale-0");
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("tokenAdmin");
@@ -20,31 +20,31 @@ export default function Menu() {
           <PiCodesandboxLogoFill className="text-2xl text-[#fff]" />
         </a>
         <div className="p-2 bg-zinc-900 rounded-full shadow-md shadow-black">
-          {positionMenu === "translate-y-44" ? (
+          {positionMenu === "scale-0" ? (
             <FaTools
-              className="text-white text-2xl"
+              className="text-white text-2xl cursor-pointer"
               onClick={() => {
-                setPositionMenu("-translate-y-[65px]");
+                setPositionMenu("scale-100");
               }}
             />
           ) : (
             <IoCloseCircleOutline
-              className="text-white text-2xl"
+              className="text-white text-2xl cursor-pointer"
               onClick={() => {
-                setPositionMenu("translate-y-44");
+                setPositionMenu("scale-0");
               }}
             />
           )}
         </div>
         <div>
           <BiLogOutCircle
-            className="text-2xl text-[#fff]"
+            className="text-2xl text-[#fff] cursor-pointer"
             onClick={handleLogout}
           />
         </div>
       </div>
       <div
-        className={`fixed bottom-0 flex items-center justify-center z-20 w-full duration-200 origin-top max-w-[360px] ${positionMenu}`}
+        className={`fixed bottom-16 flex items-center justify-center z-20 w-full duration-100 origin-bottom max-w-[360px] ${positionMenu}`}
       >
         <MenuList />
       </div>
@@ -56,10 +56,7 @@ const MenuList = () => {
   return (
     <>
       <div className="w-[80%] flex flex-col gap-3 p-3 rounded-md bg-gradient-to-b from-[#38497f] to-[#243561]">
-        <a
-          href="/create"
-          className="font-semibold text-white border-b py-2"
-        >
+        <a href="/create" className="font-semibold text-white border-b py-2">
           Add New Admin
         </a>
         <a
@@ -70,6 +67,9 @@ const MenuList = () => {
         </a>
         <a href="/bank" className="font-semibold text-white border-b py-2">
           Bank Third Party Payment
+        </a>
+        <a href="/users" className="font-semibold text-white border-b py-2">
+          Users
         </a>
       </div>
     </>

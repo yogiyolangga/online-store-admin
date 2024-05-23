@@ -54,8 +54,6 @@ const Data = ({ baseUrl }) => {
     });
   };
 
-  console.log(data);
-
   useEffect(() => {
     getData();
   }, []);

@@ -58,7 +58,6 @@ export default function OrderDetails() {
 }
 
 const DataOrder = ({ dataOrder, baseUrl }) => {
-  console.log(dataOrder);
   return (
     <>
       <div className="w-full p-2">

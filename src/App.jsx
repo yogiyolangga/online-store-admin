@@ -10,6 +10,7 @@ import Packaged from "./component/mobile/Packaged";
 import Shipping from "./component/mobile/Shipping";
 import Finished from "./component/mobile/Finished";
 import OrderDetails from "./component/mobile/OrderDetails";
+import Users from "./component/mobile/Users";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/packaged" element={<Packaged />} />
             <Route path="/shipping" element={<Shipping />} />
             <Route path="/finished" element={<Finished />} />
+            <Route path="/users" element={<Users />} />
             <Route
               path="/order/detail/:product/:orderitem/:order"
               element={<OrderDetails />}
