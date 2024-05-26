@@ -11,6 +11,7 @@ import Shipping from "./component/mobile/Shipping";
 import Finished from "./component/mobile/Finished";
 import OrderDetails from "./component/mobile/OrderDetails";
 import Users from "./component/mobile/Users";
+import Banner from "./component/mobile/Banner";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/shipping" element={<Shipping />} />
             <Route path="/finished" element={<Finished />} />
             <Route path="/users" element={<Users />} />
+            <Route path="/banner" element={<Banner />} />
             <Route
               path="/order/detail/:product/:orderitem/:order"
               element={<OrderDetails />}

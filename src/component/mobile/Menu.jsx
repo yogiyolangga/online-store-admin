@@ -56,6 +56,9 @@ const MenuList = () => {
   return (
     <>
       <div className="w-[80%] flex flex-col gap-3 p-3 rounded-md bg-gradient-to-b from-[#38497f] to-[#243561]">
+        <a href="/banner" className="font-semibold text-white border-b py-2">
+          Ads Banner Home
+        </a>
         <a href="/create" className="font-semibold text-white border-b py-2">
           Add New Admin
         </a>
