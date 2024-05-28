@@ -11,7 +11,7 @@ import { useState } from "react";
 import { isLoggedIn } from "../utils";
 
 export default function Dashboard() {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = import.meta.env.VITE_API_URL;
   const [reqConfirmPay, setReqConfirmPay] = useState([]);
   const [waitingPayment, setWaitingPayment] = useState([]);
   const [packaged, setPackaged] = useState([]);

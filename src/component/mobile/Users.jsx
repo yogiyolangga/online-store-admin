@@ -11,7 +11,7 @@ export default function Users() {
   const [searchResult, setSearchResult] = useState([]);
   const [resultStyle, setResultStyle] = useState("hidden");
   const [loading, setLoading] = useState(false);
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [clientUsername, setClientUsername] = useState("");
 
   const getSearch = async () => {

@@ -4,7 +4,7 @@ import Axios from "axios";
 import { useEffect } from "react";
 
 export default function BankPayment() {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = import.meta.env.VITE_API_URL;
   return (
     <>
       <div className="w-full">
@@ -122,13 +122,13 @@ const ListBank = ({ baseUrl }) => {
   const [data, setData] = useState([]);
 
   const getData = () => {
-    Axios.get(`${baseUrl}/api/admissn/bank`).then((response) => {
+    Axios.get(`${baseUrl}/api/adminget/bank`).then((response) => {
       if (response.data.error) {
         console.log(response.data.error);
       } else if (response.data.success) {
         setData(response.data.result);
       } else {
-        console.log("ERror");
+        console.log("Error");
       }
     });
   };

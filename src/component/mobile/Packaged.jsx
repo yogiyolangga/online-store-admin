@@ -5,7 +5,7 @@ import Axios from "axios";
 import { isLoggedIn, truncateTitle } from "../utils";
 
 export default function Packaged() {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   useEffect(() => {

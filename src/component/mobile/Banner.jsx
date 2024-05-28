@@ -27,7 +27,7 @@ const Form = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [link, setLink] = useState("");
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleSubmit = () => {
     Axios.post(`${apiUrl}/admin/banner`, {
@@ -116,7 +116,7 @@ const Form = () => {
 const Banners = () => {
   const [Banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(false);
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const getBanners = async () => {
     setLoading(true);

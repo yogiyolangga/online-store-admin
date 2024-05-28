@@ -4,7 +4,7 @@ import { CiEdit } from "react-icons/ci";
 import Menu from "./Menu";
 
 export default function Categories() {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = import.meta.env.VITE_API_URL;
   return (
     <>
       <div className="w-full">

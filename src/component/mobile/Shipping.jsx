@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 export default function Shipping() {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const isLoggedIn = () => {

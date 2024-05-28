@@ -13,7 +13,7 @@ export default function OrderDetails() {
   const idOrder = params.order;
   const [dataOrder, setDataOrder] = useState([]);
   const [loading, setLoading] = useState(true);
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const getData = async () => {
     try {
