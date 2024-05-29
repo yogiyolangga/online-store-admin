@@ -35,14 +35,17 @@ const Form = ({ baseUrl }) => {
     setIcon(file);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const fd = new FormData();
-    fd.append("name", name);
-    fd.append("description", description);
-    fd.append("icon", icon);
-    Axios.post(`${baseUrl}/api/admin/category`, fd).then((response) => {
+    try {
+      const fd = new FormData();
+      fd.append("name", name);
+      fd.append("description", description);
+      fd.append("icon", icon);
+
+      const response = await Axios.post(`${baseUrl}/api/admin/category`, fd);
+
       if (response.data.success) {
         alert("Category added successfully");
         setName("");
@@ -52,7 +55,9 @@ const Form = ({ baseUrl }) => {
       } else {
         console.log("Server might die");
       }
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
